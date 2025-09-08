@@ -1,0 +1,27 @@
+﻿Heres our sections challenge statement:
+Many college students frequently buy, sell, or trade items/services, students need a platform/marketplace to connect with one another for these services. This project invites your
+team to design a versatile software solution that helps students connect around their needs and interests. Your platform could function as a marketplace for textbooks, furniture, clothes, electronics, subleases, a tutoring network, or a combination of these. The marketplace should support clear item descriptions, images, pricing, and categories, helping users find what they need or sell what they no longer use. Beyond the core marketplace, your system can optionally include an announcement board for students to post community news, event invitations, study group announcements, or housing offers. These announcements can have rsvp links, bids, reminders etc. The system should go beyond a simple static listing board and include interactive features that require frontend backend and database communication. This could include simple searching features and filtering listings by category, price, or condition. You could also add a messaging feature between buyers and sellers or tutors and students, or you can allow creating detailed user profiles that highlight what users offer or seek. To encourage engagement and trust, you can consider adding features such as ratings and reviews, or gamification elements like badges for active participants. The design should accommodate creating accounts with different roles such as buyers and sellers.
+While this system is not required to be developed to be accessed via the web, it must be able to
+be run on multiple different machines while accessing a central database (you will run a database locally for testing and development, but it should function as if you were connecting to a database on a central server).
+
+
+Course Specifications:
+* Implements user authentication with at least two distinct user types (e.g., administrator and member)
+* Implements a dynamic database of user and item data
+* Implements one or more “operations” involving some form of frontend/backend Database communication
+* New user creation/registration should be available
+* Consideration for design aesthetics
+* System should be dynamic and responsive
+* UI design should contain elements commonly found or expected such as a user profile,login, logout.
+
+
+
+
+What tech Stack do we want to use? Decide in discussion
+
+
+Roles: Assign in discussion
+1. Product Manager - 
+2. Scrum Master - 
+3. Development Team Member - 
+4. Development Team Member -
