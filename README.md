@@ -8,25 +8,36 @@ Intro to SWE Group 5
 
 # Group Members:
  Nada Elseifi
+ 
  Trinity Saunders
+ 
  Rylee Brown
+ 
  Karla Tran
 
 
 
 # Roles
 Product Manager - Nada Elseifi
+
 Scrum Master - Trinity Saunders
+
 Development Team Member - Rylee Brown
+
 Development Team Member - Karla Tran
 
 
 # Tech Stack
 Frontend: React, 
+
 Backend: Express.js, Node.js
+
 Database: MYSQL/Maria.db
+
 Authentication: UF email-only login using Google OAuth restricted to @ufl.edu
+
 Version Control: GitHub
+
 
 
 # What is our project? 
