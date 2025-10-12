@@ -16,4 +16,3 @@ Thumbs.db
 # Build output (if any)
 dist/
 build/
-git rm -r --cached node_modules .env

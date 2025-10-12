@@ -7,3 +7,5 @@ router.get('/', getAllUsers);
 router.post('/', createUser);
 
 module.exports = router;
+
+
