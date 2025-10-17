@@ -1,8 +1,5 @@
-
-
-
-
 const db = require('../../db/connection'); 
+//const db = require('../config/db');//i dont think this works?
 
 
 // Get all users
