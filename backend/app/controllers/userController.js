@@ -1,24 +1,31 @@
-const db = require('../../db/connection'); 
-//const db = require('../config/db');//i dont think this works?
-
+const db = require('../../db/connection');
 
 // Get all users
-const getAllUsers = (req, res) => {
-  db.query('SELECT * FROM users', (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
-    res.json(results);
-  });
+exports.getAllUsers = async (req, res) => {
+  try {
+    const [rows] = await db.query('SELECT * FROM users');
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
 // Create new user
-const createUser = (req, res) => {
+exports.createUser = async (req, res) => {
   const { first_name, last_name, email, phone } = req.body;
-  const sql = 'INSERT INTO users (first_name, last_name, email, phone) VALUES (?, ?, ?, ?)';
-  db.query(sql, [first_name, last_name, email, phone], (err, result) => {
-    if (err) return res.status(500).json({ error: err.message });
-    res.status(201).json({ user_id: result.insertId, message: 'User created successfully' });
-  });
+  if (!first_name || !last_name || !email)
+    return res.status(400).json({ error: 'Missing required fields' });
+
+  try {
+    const [result] = await db.query(
+      'INSERT INTO users (first_name, last_name, email, phone) VALUES (?, ?, ?, ?)',
+      [first_name, last_name, email, phone]
+    );
+    res.status(201).json({
+      user_id: result.insertId,
+      message: 'User created successfully',
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
-
-module.exports = { getAllUsers, createUser };
-

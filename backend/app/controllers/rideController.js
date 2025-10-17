@@ -1,53 +1,60 @@
 const db = require('../../db/connection');
-//const db = require('../config/db');
 
-
-//GET all rides
-exports.getRides = (req, res) => {
-  db.query('SELECT * FROM rides', (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
-    res.json(results);
-  });
+// GET all rides
+exports.getRides = async (req, res) => {
+  try {
+    const [rows] = await db.query('SELECT * FROM rides');
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
-//CREATE new ride
-exports.createRide = (req, res) => {
+// CREATE new ride
+exports.createRide = async (req, res) => {
   const { driver_id, origin, destination, ride_date, ride_time, available_seats, gas_cost } = req.body;
   if (!driver_id || !origin || !destination || !ride_date || !ride_time)
     return res.status(400).json({ error: 'Missing required fields' });
 
-  const query = `
-    INSERT INTO rides (driver_id, origin, destination, ride_date, ride_time, available_seats, gas_cost)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
-  `;
-  db.query(query, [driver_id, origin, destination, ride_date, ride_time, available_seats || 3, gas_cost || 0], (err, result) => {
-    if (err) return res.status(500).json({ error: err.message });
+  try {
+    const [result] = await db.query(
+      `INSERT INTO rides (driver_id, origin, destination, ride_date, ride_time, available_seats, gas_cost)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [driver_id, origin, destination, ride_date, ride_time, available_seats || 3, gas_cost || 0]
+    );
     res.status(201).json({ message: 'Ride created', ride_id: result.insertId });
-  });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
-//UPDATE ride
-exports.updateRide = (req, res) => {
+// UPDATE ride
+exports.updateRide = async (req, res) => {
   const rideId = req.params.id;
   const { origin, destination, ride_date, ride_time, available_seats, gas_cost } = req.body;
 
-  const query = `
-    UPDATE rides SET origin=?, destination=?, ride_date=?, ride_time=?, available_seats=?, gas_cost=?
-    WHERE ride_id=?
-  `;
-  db.query(query, [origin, destination, ride_date, ride_time, available_seats, gas_cost, rideId], (err, result) => {
-    if (err) return res.status(500).json({ error: err.message });
-    if (result.affectedRows === 0) return res.status(404).json({ error: 'Ride not found' });
+  try {
+    const [result] = await db.query(
+      `UPDATE rides SET origin=?, destination=?, ride_date=?, ride_time=?, available_seats=?, gas_cost=? WHERE ride_id=?`,
+      [origin, destination, ride_date, ride_time, available_seats, gas_cost, rideId]
+    );
+    if (result.affectedRows === 0)
+      return res.status(404).json({ error: 'Ride not found' });
     res.json({ message: 'Ride updated successfully' });
-  });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
-//ELETE ride
-exports.deleteRide = (req, res) => {
+// DELETE ride
+exports.deleteRide = async (req, res) => {
   const rideId = req.params.id;
-  db.query('DELETE FROM rides WHERE ride_id = ?', [rideId], (err, result) => {
-    if (err) return res.status(500).json({ error: err.message });
-    if (result.affectedRows === 0) return res.status(404).json({ error: 'Ride not found' });
+  try {
+    const [result] = await db.query('DELETE FROM rides WHERE ride_id = ?', [rideId]);
+    if (result.affectedRows === 0)
+      return res.status(404).json({ error: 'Ride not found' });
     res.json({ message: 'Ride deleted successfully' });
-  });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
