@@ -1,0 +1,57 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    border-bottom: 2px solid black;
+    background-color: #fff;
+}
+
+/*left side of navbar*/
+.navbar-left{
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo{
+    height: 50px;
+    width: auto;
+}
+
+.navbar-title{
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+/*right side of navbar*/
+.navbar-right{
+    display: flex;
+    gap: 10px;
+}
+
+.nav-button{
+    padding: 8px 14px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    border: 2px solid transparent;
+    transition: 0.2s ease;
+}
+
+/* login button */
+.login{
+    border: 2px solid #ff7f00;
+    color: #ff7f00;
+}
+
+/* signup button */
+.signup{
+    border: 2px solid #0066cc;
+    color: #0066cc;
+}
+
+.nav-button:hover{
+    transform: scale(1.05);
+    background-color: rgba(0, 0, 0, 0.05);
+}
