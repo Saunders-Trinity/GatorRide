@@ -27,6 +27,10 @@ app.use('/api/ratings', ratingRoutes);
 app.use('/api/reports', reportRoutes);
 
 
+//for connection to make sure users are ufl students
+const authRoutes = require('./app/routes/authRoutes');
+console.log('Auth routes:', authRoutes);
+app.use('/api/auth', authRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
