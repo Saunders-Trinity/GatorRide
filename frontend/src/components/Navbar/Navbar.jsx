@@ -8,11 +8,13 @@ const Navbar = () => {
     return(
         <nav className="navbar">
             <div className="navbar-left">
-                <img 
-                src="/logos/LogoHorizontal.png" 
-                alt="GatorRide logo" 
-                className="navbar-logo"
-                />
+                <Link to="/">
+                    <img 
+                    src="/logos/LogoHorizontal.png" 
+                    alt="GatorRide logo" 
+                    className="navbar-logo"
+                    />
+                </Link>
             </div>
  
             <div className="navbar-right">

@@ -1,0 +1,49 @@
+.homescreen-container {
+    /* Center if we choose not to add a photo */
+    text-align: center;
+    margin-top: 50px;
+}
+
+.homescreen-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    background-color: #ccd8fc;
+    padding: 10px 20px;
+    display: inline-block;
+}
+.homescreen-container p {
+    font-size: 1.2rem;
+    max-width: 420px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.button-group {
+    margin-top: 50px; 
+}
+
+.nav-button{
+    padding: 8px 14px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    border: 2px solid transparent;
+    transition: 0.2s ease;
+}
+
+/* login button */
+.login{
+    border: 2px solid #ff7f00;
+    color: #ff7f00;
+}
+
+/* signup button */
+.signup{
+    border: 2px solid #0066cc;
+    color: #0066cc;
+}
+
+.nav-button:hover{
+    transform: scale(1.05);
+    background-color: rgba(0, 0, 0, 0.05);
+}
