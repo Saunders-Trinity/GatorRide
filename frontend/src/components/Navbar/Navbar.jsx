@@ -2,7 +2,7 @@ import React from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 
-console.log("Navbar file loaded ✅");
+console.log("Navbar file loaded");
 
 const Navbar = () => {
     return(

@@ -32,7 +32,12 @@ exports.register = async (req, res) => {
     if (err.code === 'ER_DUP_ENTRY') {
       res.status(400).json({ error: 'Email already registered' });
     } else {
-      res.status(500).json({ error: 'Failed to register user' });
+      //res.status(500).json({ error: 'Failed to register user' });
+      console.error("Database insert failed:", err);
+      res.status(500).json({ 
+      error: 'Failed to register user', 
+      details: err.message 
+  });
     }
   }
 };
