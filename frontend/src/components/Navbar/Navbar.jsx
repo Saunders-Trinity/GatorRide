@@ -44,7 +44,7 @@ const Navbar = ({user, onLogout}) => {
                 {user.role==='Admin' && (
                 <>
                     <>
-                        <Link to="/reportmanager" className="nav-button reportmanager"> Report Manager </Link>
+                        <Link to="/report" className="nav-button reportmanager"> Report Manager </Link>
                     </>
                     {/*We can change this to a proper dropdown menu later.*/}
                     <Link to="/profile" className="nav-button profile">

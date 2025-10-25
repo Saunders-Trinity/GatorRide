@@ -33,7 +33,7 @@ console.log("ReportManager import:", ReportManager);
       <div>
         <Navbar user={user} onLogout={handleLogout}/>
         <Routes>
-          <Route path="/" element={<HomeScreen />} />
+          <Route path="/" element={<HomeScreen user={user} />} />
           <Route path="/login" element={<LoginPage onLogin={handleLogin}/>} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/profile" element={<GeneralProfile localUser={user}/>} />
