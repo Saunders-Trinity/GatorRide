@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 console.log("Navbar file loaded ✅");
 
-const Navbar = () => {
+const Navbar = ({user, onLogout}) => {
     return(
         <nav className="navbar">
             <div className="navbar-left">
@@ -18,11 +18,52 @@ const Navbar = () => {
             </div>
  
             <div className="navbar-right">
-                <Link to="/login" className="nav-button login"> Log In</Link>
-                <Link to="/signup" className="nav-button signup">Sign Up</Link>
+                {/* Change to !isAuthenticated later */}
+                {user.role === 'Guest'&& (
+                    <>
+                        <Link to="/login" className="nav-button login"> Log In</Link>
+                        {/*<LoginButton />*/}
+                        <Link to="/signup" className="nav-button signup"> SignUp </Link>
+                    </>
+                )}
+                {/*Change to isAuthenticated later*/}
+                {user.role === 'User' && (
+                <>
+                    {/*We can change this to a proper dropdown menu later.*/}
+                    <Link to="/profile" className="nav-button profile">
+                        <img
+                        src="/profilepics/DefaultPFP.png"
+                        alt="DefaultPFP"
+                        className="profile-pic"
+                        />
+                    </Link>
+                    <button onClick={onLogout} className = "nav-button logout"> Log Out </button>
+                    {/*<LogoutButton />*/}
+                </>
+                )}
+                {user.role==='Admin' && (
+                <>
+                    <>
+                        <Link to="/report" className="nav-button reportmanager"> Report Manager </Link>
+                    </>
+                    {/*We can change this to a proper dropdown menu later.*/}
+                    <Link to="/profile" className="nav-button profile">
+                        <img
+                        src="/profilepics/DefaultPFP.png"
+                        alt="DefaultPFP"
+                        className="profile-pic"
+                        />
+                    </Link>
+                    <button onClick={onLogout} className = "nav-button logout"> Log Out </button>
+                    {/*<LogoutButton />*/}
+                </>
+                )}
             </div>
+
+
         </nav>
     );
 };
+
 
 export default Navbar;
