@@ -40,11 +40,51 @@ const SignUpPage = () => {
         setFormData((prev) => ({ ...prev, profilePic: file}));
     };
 
-    const handleSubmit = (e) => {
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     console.log("Form submitted:", formData);
+    //     //add backend connection to add user to database
+    // }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form submitted:", formData);
-        //add backend connection to add user to database
-    }
+      
+        // checks that passwords match
+        if (formData.password !== formData.confirmPassword) {
+          alert("Passwords do not match!");
+          return;
+        }
+      
+        // matching backend field names, change to add profile pic and payment info, phone is null for now
+        const payload = {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.ufEmail,
+          password: formData.password,
+          phone: null, // backend will handle this as null (for now)
+        };
+      
+        try {
+          const response = await fetch("http://localhost:8000/api/auth/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+      
+          const data = await response.json();
+      
+          if (response.ok) {
+            alert("Signup successful!");
+            console.log("User created:", data);
+          } else {
+            alert(data.error || "Signup failed. Check your email or password.");
+            console.log("Error:", data);
+          }
+        } catch (err) {
+          console.error("Signup error:", err);
+          alert("Server error. Please try again later.");
+        }
+      };
 
     return(
         <div className="signup-container">
