@@ -20,13 +20,17 @@ console.log("ReportManager import:", ReportManager);
 
   const handleLogin = (userData) => {
     setUser(userData);
-    //Insert Auth0 Login logic here
+    navigate("/");
   };
+
+  const handleSignup = (userData) => {
+    setUser(userData);
+    navigate("/");
+  }
  
   const handleLogout = () => {
     setUser({role: "Guest"});
     navigate("/login");
-    //Insert Auth0 Logout logic here
   };
 
   return (
@@ -35,7 +39,7 @@ console.log("ReportManager import:", ReportManager);
         <Routes>
           <Route path="/" element={<HomeScreen user={user} />} />
           <Route path="/login" element={<LoginPage onLogin={handleLogin}/>} />
-          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/signup" element={<SignUpPage onSignup={handleSignup}/>} />
           <Route path="/profile" element={<GeneralProfile localUser={user}/>} />
           <Route path='/report' element={<ReportManager/>}/>
         </Routes>
