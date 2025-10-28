@@ -1,8 +1,10 @@
 //import Navbar from "../../components/Navbar/Navbar";
 import React, { useState } from "react";
+import {useNavigate} from "react-router-dom"
 import "./signupPage.css";
 
-const SignUpPage = () => {
+const SignUpPage = ({ onSignup }) => {
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         firstName: "",
@@ -76,6 +78,10 @@ const SignUpPage = () => {
           if (response.ok) {
             alert("Signup successful!");
             console.log("User created:", data);
+
+            onSignup({email: formData.ufEmail, role: "User"});
+            navigate("/");
+
           } else {
             alert(data.error || "Signup failed. Check your email or password.");
             console.log("Error:", data);
@@ -84,6 +90,10 @@ const SignUpPage = () => {
           console.error("Signup error:", err);
           alert("Server error. Please try again later.");
         }
+      };
+
+      const handleCancel = () => {
+        navigate("/");
       };
 
     return(
@@ -155,7 +165,7 @@ const SignUpPage = () => {
 
             <div className="form-actions">
                 <button type="submit" className="signup-button">SIGN UP</button>
-                <button type="button" className="cancel-button">Cancel</button>
+                <button type="button" className="cancel-button" onClick={handleCancel}>Cancel</button>
             </div>
                 </div>
 
