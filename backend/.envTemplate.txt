@@ -14,3 +14,5 @@ DB_HOST=get from cloud
 DB_PORT=get from cloud
 DB_NAME=gatorride # the defaultdb in Aiven should be empty
 #DB_NAME=defaultdb
+DB_SSL_CERT=./ca.pem
+JWT_SECRET_KEY=supersecretkey

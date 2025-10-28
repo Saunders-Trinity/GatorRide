@@ -16,3 +16,6 @@ Thumbs.db
 # Build output (if any)
 dist/
 build/
+
+#ca
+ca.pem

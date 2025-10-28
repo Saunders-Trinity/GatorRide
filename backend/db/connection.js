@@ -27,6 +27,7 @@ require('dotenv').config({path: path.join(__dirname, '../.env')});
 
 console.log('DB_USER: ', process.env.DB_USER);
 
+//MATCH THESE .NAMES EXACTLY IN THE .ENV
 const db = mysql.createPool({
   host: process.env.DB_HOST, // || 'localhost',
   user: process.env.DB_USER, // || 'root',
