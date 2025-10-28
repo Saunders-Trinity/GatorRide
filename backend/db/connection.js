@@ -19,14 +19,24 @@
 // module.exports = connection;
 
 //use promise version
+const fs = require('fs');
+const path = require('path');
 const mysql = require('mysql2/promise');
 require('dotenv').config();
 
+console.log("connection test working");
+console.log('DB_USER: ', process.env.DB_USER);
+
 const db = mysql.createPool({
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || 'root', 
-  database: process.env.DB_NAME || 'gatorride',
+  host: process.env.DB_HOST, // || 'localhost',
+  user: process.env.DB_USER, // || 'root',
+  password: process.env.DB_PASSWORD, // || 'root',
+  database: process.env.DB_NAME, // || 'gatorride',
+  port: process.env.DB_PORT,
+  ssl:{
+    rejectUnauthorized: true,
+    ca: fs.readFileSync(path.join(__dirname, './ca.pem')).toString(),
+  },
 });
 
 module.exports = db;
