@@ -24,7 +24,7 @@ const path = require('path');
 const mysql = require('mysql2/promise');
 require('dotenv').config();
 
-console.log("connection test working");
+
 console.log('DB_USER: ', process.env.DB_USER);
 
 const db = mysql.createPool({
