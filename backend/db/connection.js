@@ -22,9 +22,9 @@
 const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql2/promise');
-require('dotenv').config();
+//WARNING: .env needs to be in backend, same level as the gitignore
+require('dotenv').config({path: path.join(__dirname, '../.env')});
 
-console.log("connection test working");
 console.log('DB_USER: ', process.env.DB_USER);
 
 const db = mysql.createPool({

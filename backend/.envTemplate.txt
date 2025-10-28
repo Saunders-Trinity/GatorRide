@@ -1,0 +1,16 @@
+This is the template for .env
+
+ADD THE .ENV TO THE SAME LEVEL AS THIS FILE
+You can find the info on the cloud mysql's connection info
+
+[also add the ca.pem file to the same level as connection.js in backend/db]
+
+.env:
+NODE_ENV=development
+
+DB_USER=avnadmin
+DB_PASSWORD=get from cloud
+DB_HOST=get from cloud
+DB_PORT=get from cloud
+DB_NAME=gatorride # the defaultdb in Aiven should be empty
+#DB_NAME=defaultdb
