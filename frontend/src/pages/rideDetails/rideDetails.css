@@ -1,0 +1,126 @@
+  /* overall page */
+.ridedetails-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f8f9fb;
+    font-family: "Inter", sans-serif;
+  }
+  
+  /* header */
+  .ridedetails-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0021a5;
+    color: white;
+    padding: 10px 20px;
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .search-bar {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: none;
+  }
+  
+  .search-btn {
+    background-color: #f58220;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  /* main layout */
+  .ridedetails-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 80px;
+    flex: 1;
+  }
+  
+  /* left side */
+  .ride-box {
+    flex: 1;
+    background-color: #ffffff;
+    border: 2px solid #0021a5;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    font-weight: bold;
+    color: #0021a5;
+  }
+  
+  /* right side */
+  .poster-box {
+    flex: 1;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 25px;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .poster-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .poster-icon {
+    font-size: 1.5rem;
+  }
+  
+  .payment-links {
+    margin-top: 30px;
+  }
+  
+  .payment-placeholder {
+    border: 1px dashed #aaa;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #666;
+  }
+  
+  /* buttons */
+  .action-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 30px;
+  }
+  
+  .confirm-btn {
+    background-color: #0021a5;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .cancel-btn {
+    background: none;
+    border: 2px solid red;
+    color: red;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  

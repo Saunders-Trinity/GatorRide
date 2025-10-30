@@ -1,0 +1,124 @@
+  /* overall page */
+.postride-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f8f9fb;
+    font-family: "Inter", sans-serif;
+  }
+  
+  /* header */
+  .postride-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #0021a5;
+    color: white;
+    padding: 10px 20px;
+  }
+  
+  .return-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+  
+  .search-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .search-bar {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: none;
+  }
+  
+  .search-btn {
+    background-color: #f58220;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  /* main content */
+  .postride-content {
+    flex: 1;
+    padding: 30px 50px;
+  }
+  
+  .post-title {
+    text-align: center;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #0021a5;
+    margin-bottom: 20px;
+  }
+  
+  /* body */
+  .post-body {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+  }
+  
+  /* left column */
+  .left-column {
+    flex: 1;
+  }
+  
+  .map-box {
+    background-color: #d6e0f5;
+    height: 200px;
+    border: 2px solid #0021a5;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #0021a5;
+    margin-bottom: 15px;
+  }
+  
+  .car-info {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+  }
+  
+  /* right column */
+  .right-column {
+    flex: 1.2;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .detail-row {
+    margin-bottom: 10px;
+  }
+  
+  .detail-row label {
+    font-weight: bold;
+    margin-right: 10px;
+    color: #0021a5;
+  }
+  
+  .ride-share-btn {
+    margin-top: 20px;
+    background-color: #f58220;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
