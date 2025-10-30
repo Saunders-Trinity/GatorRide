@@ -68,13 +68,10 @@
 
 /* General Profile Page */
 .profile-pic {
-    width: 50px;
-    height: auto;
+    height: 35px;
+    width: 35px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #0066cc;
-    cursor: pointer;
-    transition: 0.2s ease;
 }
 
 .profile-pic:hover{

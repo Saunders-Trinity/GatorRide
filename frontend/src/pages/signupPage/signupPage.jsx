@@ -170,7 +170,7 @@ const SignUpPage = ({ onSignup }) => {
                 </div>
 
                 <div className="form-right">
-                    <div className="profile-pic">
+                    <div className="signup-pic">
                         {formData.profilePic ? (
                             <img
                                 src={URL.createObjectURL(formData.profilePic)}
