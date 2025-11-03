@@ -10,11 +10,14 @@ const SignUpPage = ({ onSignup }) => {
         firstName: "",
         lastName: "",
         ufEmail: "",
+        phone: "",                 // NEW to match DB
         password: "",
         confirmPassword: "",
-        paymentLinks: [""],
+        paymentLink: "",           // single optional link
         profilePic: null,
     });
+
+
 
     /* these functions are to handle when the user updates their profile */
     /* prev is the previous val before the user enters anything  */
@@ -24,18 +27,18 @@ const SignUpPage = ({ onSignup }) => {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const addPaymentLink = () => {
-        setFormData((prev) => ({
-            ...prev,
-            paymentLinks: [...prev.paymentLinks, ""],
-          }));
-    };
+    // const addPaymentLink = () => {
+    //     setFormData((prev) => ({
+    //         ...prev,
+    //         paymentLinks: [...prev.paymentLinks, ""],
+    //       }));
+    // };
 
-    const handleLinkChange = (index, value) => {
-        const updatedLinks = [ ...formData.paymentLinks];
-        updatedLinks[index] = value;
-        setFormData((prev) => ({ ...prev, paymentLinks: updatedLinks}));
-    };
+    // const handleLinkChange = (index, value) => {
+    //     const updatedLinks = [ ...formData.paymentLinks];
+    //     updatedLinks[index] = value;
+    //     setFormData((prev) => ({ ...prev, paymentLinks: updatedLinks}));
+    // };
 
     const handleProfilePic = (e) => {
         const file = e.target.files[0];
@@ -58,13 +61,24 @@ const SignUpPage = ({ onSignup }) => {
         }
       
         // matching backend field names, change to add profile pic and payment info, phone is null for now
+        // const payload = {
+        //   first_name: formData.firstName,
+        //   last_name: formData.lastName,
+        //   email: formData.ufEmail,
+        //   password: formData.password,
+        //   phone: null, // backend will handle this as null (for now)
+        // };
         const payload = {
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          email: formData.ufEmail,
-          password: formData.password,
-          phone: null, // backend will handle this as null (for now)
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.ufEmail,
+            password: formData.password,
+            phone: formData.phone || null,
+            payment_link: formData.paymentLink || null,   // NEW
         };
+
+         console.log("SIGNUP payload →", payload); //added 
+
       
         try {
           const response = await fetch("http://localhost:8000/api/auth/register", {
@@ -150,18 +164,24 @@ const SignUpPage = ({ onSignup }) => {
                     required
                 />
 
-                <label>Payment Links (Zelle, Venmo, etc.):</label>
-                {formData.paymentLinks.map((link, index) => (
-
+                <label>Phone (optional):</label>
                 <input
-                    key={index}
-                    type="text"
-                    placeholder={`Link ${index + 1}`}
-                    value={link}
-                    onChange={(e) => handleLinkChange(index, e.target.value)}
+                    type="tel"
+                    name="phone"
+                    placeholder="555-555-5555"
+                    value={formData.phone}
+                    onChange={handleChange}
                 />
-            ))}
-            <button type="button" className="add-link-btn" onClick={addPaymentLink}>+</button>
+
+                <label>Payment link (optional):</label>
+                <input
+                    type="url"
+                    name="paymentLink"
+                    placeholder="https://venmo.com/u/..."
+                    value={formData.paymentLink}
+                    onChange={handleChange}
+                />
+
 
             <div className="form-actions">
                 <button type="submit" className="signup-button">SIGN UP</button>

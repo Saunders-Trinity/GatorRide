@@ -9,9 +9,12 @@ CREATE TABLE users (
   first_name  VARCHAR(50)  NOT NULL,
   last_name   VARCHAR(50)  NOT NULL,
   email       VARCHAR(100) NOT NULL UNIQUE,
-  phone       VARCHAR(20),
-  rating      DECIMAL(2,1) DEFAULT 5.0,
-  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  phone         VARCHAR(20),
+  payment_link  VARCHAR(255) NULL,
+  password_hash VARCHAR(255) NOT NULL,
+  role          ENUM('User','Admin') NOT NULL DEFAULT 'User',
+  rating        DECIMAL(2,1) DEFAULT 5.0,
+  created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
 -- RIDES: listings posted by drivers
@@ -83,3 +86,5 @@ CREATE TABLE reports (
 -- Useful indexes
 CREATE INDEX idx_rides_date_time ON rides (ride_date, ride_time);
 CREATE INDEX idx_rides_origin_dest ON rides (origin, destination);
+
+

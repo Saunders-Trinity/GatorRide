@@ -33,12 +33,15 @@
   
   .form-left input[type="text"],
   .form-left input[type="email"],
-  .form-left input[type="password"] {
+  .form-left input[type="password"],
+  .form-left input[type="tel"],       /* NEW: phone */
+  .form-left input[type="url"] {      /* NEW: payment link */
     padding: 8px;
     border: 2px solid black;
     border-radius: 4px;
     font-size: 1rem;
   }
+
   
   /* add link button (+) to add more than one form of payment */
   .add-link-btn {
