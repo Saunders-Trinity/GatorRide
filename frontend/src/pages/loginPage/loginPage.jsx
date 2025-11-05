@@ -9,24 +9,44 @@ const LoginPage = ({onLogin}) => {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     console.log("Logging in with:", email, password);
+    //     //connect with backend here
+
+    //     //HardCoded for frontend testing, change later:
+    //     let role = "Guest"; //default to guest view
+
+    //     if (email === "admin@ufl.edu" && password === "password"){
+    //         role = "Admin";
+    //     }
+    //     else if (email === "testUser@ufl.edu" && password === "password"){
+    //         role = "User";
+    //     }
+    //     const userData = {email, role};
+    //     onLogin(userData);
+    //     navigate("/");
+    // };
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Logging in with:", email, password);
-        //connect with backend here
+        try {
+            const res = await fetch("http://localhost:8000/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password }),
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || "Login failed");
 
-        //HardCoded for frontend testing, change later:
-        let role = "Guest"; //default to guest view
-
-        if (email === "admin@ufl.edu" && password === "password"){
-            role = "Admin";
+            const role = data.role || "User";
+            onLogin({ email, role, token: data.token });
+            navigate("/");
+        } catch (err) {
+            alert(err.message);
+            console.error(err);
         }
-        else if (email === "testUser@ufl.edu" && password === "password"){
-            role = "User";
-        }
-        const userData = {email, role};
-        onLogin(userData);
-        navigate("/");
     };
+
 
     return(
         <div className="login-container">
