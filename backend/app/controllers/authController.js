@@ -3,6 +3,10 @@ const bcrypt = require('bcrypt');
 //const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const JWT_SECRET = process.env.JWT_SECRET || 'fallback-dev-secret';
+console.log('JWT_SECRET loaded?', !!JWT_SECRET); // temporary debug
+
+
 // User signup, only ufl students
 exports.register = async (req, res) => {
   try {
@@ -69,9 +73,10 @@ exports.login = async (req, res) => {
     // sign JWT with user_id and role
     const token = jwt.sign(
       { user_id: user.user_id, role: user.role },
-      process.env.JWT_SECRET,
+      JWT_SECRET,
       { expiresIn: "7d" }
     );
+
 
     return res.json({ token, role: user.role, user_id: user.user_id });
   } catch (err) {
