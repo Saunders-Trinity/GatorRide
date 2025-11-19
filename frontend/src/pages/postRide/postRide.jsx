@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./postRide.css";
 
 const PostRide = () => {
   return (
     <div className="postride-page">
       <header className="postride-header">
-        <button className="return-btn">← Return</button>
+        <Link to="/" className="return-btn">← Return</Link>
         <div className="search-bar-container">
           <input type="text" className="search-bar" placeholder="Search for rides here" />
           <button className="search-btn">Search</button>

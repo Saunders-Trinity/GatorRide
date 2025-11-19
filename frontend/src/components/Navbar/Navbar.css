@@ -53,13 +53,33 @@
 
 /* logout button */
 .logout{
+    background-color: transparent;
     border: 2px solid #ff7f00;
     color: #ff7f00;
 }
 
+/*
 .nav-button:hover{
     transform: scale(1.05);
     background-color: rgba(0, 0, 0, 0.05);
+}
+    */
+.login:hover{
+    transform: scale(1.05);
+    background-color: #fae5cf;
+}
+.signup:hover{
+    transform: scale(1.05);
+    background-color: #cad3db;
+}
+
+.profile-pic:hover{
+    transform: scale(1.05);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+.logout:hover{
+    transform: scale(1.05);
+    background-color:#fae5cf;
 }
 
 .navbar-logo:hover {
@@ -86,4 +106,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.reportmanager:hover{
+    transform: scale(1.05);
+    background-color: #cad3db;
 }

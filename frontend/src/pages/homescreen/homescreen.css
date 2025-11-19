@@ -19,16 +19,20 @@
 }
 
 .button-group {
-    margin-top: 50px; 
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
-.nav-button{
-    padding: 8px 14px;
+.homepage-button{
+    padding: 12px 22px;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
     border: 2px solid transparent;
     transition: 0.2s ease;
+    font-size: 1.1rem;
 }
 
 /* login button */
@@ -43,7 +47,28 @@
     color: #0066cc;
 }
 
-.nav-button:hover{
+.search{
+    border: 2px solid #0066cc;
+    color: #0066cc;
+}
+
+.post{
+    border: 2px solid #ff7f00;
+    color: #ff7f00;
+}
+
+.post:hover{
+    transform: scale(1.05);
+    background-color:#fae5cf;
+}
+.search:hover{
+    transform: scale(1.05);
+    background-color:#cad3db;
+}
+
+/*
+.homepage-button:hover{
     transform: scale(1.05);
     background-color: rgba(0, 0, 0, 0.05);
 }
+    */
