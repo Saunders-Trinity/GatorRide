@@ -104,28 +104,49 @@ const RideDetails = () => {
       <main className="ridedetails-content">
         {/* left side */}
         <div className="ride-box">
-          <h2>Ride Details</h2>
-          <p>
-            <strong>From:</strong> {ride.origin}
-          </p>
-          <p>
-            <strong>To:</strong> {ride.destination}
-          </p>
-          <p>
-            <strong>Date:</strong> {dateStr}
-          </p>
-          <p>
-            <strong>Time:</strong> {timeStr}
-          </p>
-          <p>
-            <strong>Seats Available:</strong> {ride.available_seats}
-          </p>
-          {ride.gas_cost != null && (
-            <p>
-              <strong>Gas Cost:</strong> ${Number(ride.gas_cost).toFixed(2)}
-            </p>
-          )}
+          <h2 className="ride-title">Ride Details</h2>
+
+        <div className="ride-details-card">
+          <div className="details-row">
+            <div className="detail-item">
+              <span className="label">From:</span>
+              <span className="value">{ride.origin}</span>
+            </div>
+
+        <div className="detail-item">
+          <span className="label">To:</span>
+          <span className="value">{ride.destination}</span>
         </div>
+      </div>
+
+      <div className="details-row">
+        <div className="detail-item">
+          <span className="label">Date:</span>
+          <span className="value">{dateStr}</span>
+      </div>
+
+      <div className="detail-item">
+        <span className="label">Time:</span>
+        <span className="value">{timeStr}</span>
+      </div>
+    </div>
+
+    <div className="details-row">
+      <div className="detail-item">
+        <span className="label">Seats Available:</span>
+        <span className="value">{ride.available_seats}</span>
+      </div>
+
+      {ride.gas_cost != null && (
+        <div className="detail-item">
+          <span className="label">Gas Cost:</span>
+          <span className="value">${Number(ride.gas_cost).toFixed(2)}</span>
+        </div>
+      )}
+    </div>
+  </div>
+</div>
+
 
         {/* right side */}
         <div className="poster-box">

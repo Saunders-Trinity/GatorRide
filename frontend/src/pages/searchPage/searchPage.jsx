@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./searchPage.css";
 import { Link } from "react-router-dom";
+import RideCard from "../../components/RideCard/RideCard";  
 
 // Connects search page to backend rides endpoint with query params
 const SearchPage = () => {
@@ -87,6 +88,10 @@ const SearchPage = () => {
             value={seats}
             onChange={(e) => setSeats(e.target.value)}
           />
+
+          <button className="filter-btn" onClick={handleSearch}>
+          Apply Filters
+          </button>
         </aside>
 
         <main className="ride-results">
@@ -95,33 +100,11 @@ const SearchPage = () => {
             <p>No rides yet. Try searching for a trip.</p>
           )}
 
-          <ul>
+          <div className="ride-cards-container">
             {results.map((ride) => (
-              <li key={ride.ride_id}>
-                <Link to={`/rides/${ride.ride_id}`}>
-                  {(() => {
-                    const date = new Date(ride.ride_date);
-                    const dateStr = date.toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    }); // "Jan 1, 2024"
-                    const timeStr = ride.ride_time?.slice(0, 5); // "10:00"
-
-                    return (
-                      <>
-                        <strong>
-                          {ride.origin} → {ride.destination}
-                        </strong>{" "}
-                        on {dateStr} at {timeStr} &nbsp;|&nbsp; Seats:{" "}
-                        {ride.available_seats}
-                      </>
-                    );
-                  })()}
-                </Link>
-              </li>
+              <RideCard key={ride.ride_id} ride={ride} />
             ))}
-          </ul>
+          </div>
         </main>
       </div>
     </div>
