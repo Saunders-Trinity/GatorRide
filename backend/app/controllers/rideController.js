@@ -58,3 +58,32 @@ exports.deleteRide = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+// GET /api/rides/:id  -> one ride with driver info
+exports.getRideById = async (req, res) => {
+  try {
+    const rideId = req.params.id;
+
+    const [rows] = await db.query(
+      `
+      SELECT 
+        r.*,
+        CONCAT(u.first_name, ' ', u.last_name) AS driver_name,
+        u.payment_link
+      FROM rides r
+      JOIN users u ON u.user_id = r.driver_id
+      WHERE r.ride_id = ?
+      `,
+      [rideId]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'Ride not found' });
+    }
+
+    return res.json(rows[0]);
+  } catch (err) {
+    console.error('getRideById error:', err);
+    return res.status(500).json({ error: 'Server error' });
+  }
+};

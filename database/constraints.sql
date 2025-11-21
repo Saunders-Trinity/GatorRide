@@ -1,7 +1,11 @@
-USE gatorride;
+-- GatorRide extra constraints for defaultdb
 
--- Seats must be 0..8
+USE defaultdb;
+
+-- Seats must be between 0 and 8 (inclusive)
 ALTER TABLE rides
-  ADD CONSTRAINT chk_rides_seats CHECK (available_seats BETWEEN 0 AND 8);
+  ADD CONSTRAINT chk_rides_seats
+  CHECK (available_seats BETWEEN 0 AND 8);
 
--- Score already has CHECK 1..5 in your schema 👍
+-- Note: ratings.score already has CHECK (score BETWEEN 1 AND 5)
+-- in schema.sql, so no extra constraint is needed here.
