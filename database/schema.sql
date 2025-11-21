@@ -1,14 +1,20 @@
--- GatorRide Schema (drop & recreate cleanly)
-DROP DATABASE IF EXISTS gatorride;
-CREATE DATABASE gatorride;
-USE gatorride;
+-- GatorRide Schema (drop & recreate tables cleanly in defaultdb)
+
+USE defaultdb;
+
+-- Drop tables in dependency order
+DROP TABLE IF EXISTS reports;
+DROP TABLE IF EXISTS ratings;
+DROP TABLE IF EXISTS bookings;
+DROP TABLE IF EXISTS rides;
+DROP TABLE IF EXISTS users;
 
 -- USERS: UF students & drivers
 CREATE TABLE users (
-  user_id     INT AUTO_INCREMENT PRIMARY KEY,
-  first_name  VARCHAR(50)  NOT NULL,
-  last_name   VARCHAR(50)  NOT NULL,
-  email       VARCHAR(100) NOT NULL UNIQUE,
+  user_id       INT AUTO_INCREMENT PRIMARY KEY,
+  first_name    VARCHAR(50)  NOT NULL,
+  last_name     VARCHAR(50)  NOT NULL,
+  email         VARCHAR(100) NOT NULL UNIQUE,
   phone         VARCHAR(20),
   payment_link  VARCHAR(255) NULL,
   password_hash VARCHAR(255) NOT NULL,
@@ -86,5 +92,3 @@ CREATE TABLE reports (
 -- Useful indexes
 CREATE INDEX idx_rides_date_time ON rides (ride_date, ride_time);
 CREATE INDEX idx_rides_origin_dest ON rides (origin, destination);
-
-

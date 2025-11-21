@@ -2,8 +2,11 @@ const express = require('express');
 const router = express.Router();
 const rideController = require('../controllers/rideController');
 
-// GET all rides
+// GET all rides (search/filter)
 router.get('/', rideController.getRides);
+
+// GET one ride by ID
+router.get('/:id', rideController.getRideById);
 
 // POST new ride
 router.post('/', rideController.createRide);

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./searchPage.css";
+import { Link } from "react-router-dom";
 
 // Connects search page to backend rides endpoint with query params
 const SearchPage = () => {
-  const [query, setQuery] = useState("");        // main search text
+  const [query, setQuery] = useState(""); // main search text
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [seats, setSeats] = useState(1);
@@ -20,7 +21,6 @@ const SearchPage = () => {
       // Build query string to hit GET /api/rides
       const params = new URLSearchParams();
 
-      // you can rename these keys to whatever rideController.getRides expects
       if (query) params.append("q", query);
       if (startDate) params.append("startDate", startDate);
       if (endDate) params.append("endDate", endDate);
@@ -33,7 +33,6 @@ const SearchPage = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // if backend returns { rides: [...] } change this to data.rides
         setResults(Array.isArray(data) ? data : data.rides || []);
       } else {
         setError(data.error || "Search failed.");
@@ -99,25 +98,28 @@ const SearchPage = () => {
           <ul>
             {results.map((ride) => (
               <li key={ride.ride_id}>
-                {(() => {
+                <Link to={`/rides/${ride.ride_id}`}>
+                  {(() => {
                     const date = new Date(ride.ride_date);
                     const dateStr = date.toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
                     }); // "Jan 1, 2024"
                     const timeStr = ride.ride_time?.slice(0, 5); // "10:00"
-                    return (
-                        <>
-                            <strong>
-                                {ride.origin} → {ride.destination}
-                            </strong>{" "}
-                            on {dateStr} at {timeStr} &nbsp;|&nbsp; Seats: {ride.available_seats}
-                        </>
-                    );
-                })()}
-            </li>
 
+                    return (
+                      <>
+                        <strong>
+                          {ride.origin} → {ride.destination}
+                        </strong>{" "}
+                        on {dateStr} at {timeStr} &nbsp;|&nbsp; Seats:{" "}
+                        {ride.available_seats}
+                      </>
+                    );
+                  })()}
+                </Link>
+              </li>
             ))}
           </ul>
         </main>
