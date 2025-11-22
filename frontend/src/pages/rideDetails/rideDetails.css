@@ -41,25 +41,58 @@
   
   /* main layout */
   .ridedetails-content {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
     padding: 40px 80px;
     flex: 1;
+    align-items: start; /* ensures top alignment */
   }
   
   /* left side */
-  .ride-box {
-    flex: 1;
-    background-color: #ffffff;
-    border: 2px solid #0021a5;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 300px;
-    font-weight: bold;
-    color: #0021a5;
-  }
+ /* ride details title */
+.ride-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #003087;
+  margin-bottom: 12px;
+}
+
+/* card container */
+.ride-details-card {
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  border: 1px solid #dcdcdc;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+  max-width: 650px;
+  width: 100%;
+}
+
+/* rows inside the card */
+.details-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+/* individual label/value pairs */
+.detail-item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.label {
+  font-weight: 600;
+  color: #023e8a;
+}
+
+.value {
+  font-weight: 500;
+  color: #333;
+}
+
   
   /* right side */
   .poster-box {
