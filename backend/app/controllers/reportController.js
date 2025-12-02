@@ -16,7 +16,7 @@ exports.getAllReports = async (req, res) => {
 exports.addReport = async (req, res) => {
   const { reporter_id, reported_user_id, reason } = req.body;
   try {
-    await db.query(
+    const result = await db.query(
       'INSERT INTO reports (reporter_id, reported_user_id, reason, created_at) VALUES (?, ?, ?, NOW())',
       [reporter_id, reported_user_id, reason]
     );
