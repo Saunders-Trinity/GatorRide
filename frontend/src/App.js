@@ -54,7 +54,7 @@ function App() {
         <Route path="/report" element={<ReportManager />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/post" element={<PostRide user={user} />} />
-        <Route path="/rides/:rideId" element={<RideDetails />} />
+        <Route path="/rides/:rideId" element={<RideDetails user={user} />} />
       </Routes>
     </div>
   );

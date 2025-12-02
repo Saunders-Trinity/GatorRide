@@ -3,13 +3,14 @@ import React, { useEffect, useState } from "react";
 import "./rideDetails.css";
 import { useParams, useNavigate } from "react-router-dom";
 
-const RideDetails = () => {
+const RideDetails = ({ user }) => {
   const { rideId } = useParams();
   const navigate = useNavigate();
 
   const [ride, setRide] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [paymentLink, setPaymentLink] = useState("");
 
   useEffect(() => {
     const fetchRide = async () => {
@@ -40,10 +41,30 @@ const RideDetails = () => {
     if (rideId) fetchRide();
   }, [rideId]);
 
-  const handleConfirm = () => {
-    // later: call booking endpoint here (POST /api/bookings)
-    console.log("Confirm clicked for ride", rideId);
-  };
+const handleConfirm = async () => {
+  try {
+    const res = await fetch("http://localhost:8000/api/bookings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ride_id: rideId,
+        passenger_id: user.user_id,   // 
+        seats_reserved: 1,
+        payment_link: paymentLink,    // what they typed
+      }),
+    });
+
+    const data = await res.json();
+    console.log("Booking result:", data);
+
+    // you can change this later to whatever page you want
+    navigate("/profile");
+  } catch (err) {
+    console.error("Booking error:", err);
+  }
+};
+
+
 
   const handleCancel = () => {
     navigate(-1);
@@ -156,10 +177,19 @@ const RideDetails = () => {
           </div>
 
           <div className="payment-links">
+
             <div className="payment-placeholder">
-              {ride.payment_link || "Payment Link 1"}
+              Driver’s Payment Link: {ride.payment_link || "None provided"}
             </div>
-            <div className="payment-placeholder">Payment Link 2</div>
+
+            <input
+              type="text"
+              placeholder="Paste your payment link"
+              value={paymentLink}
+              onChange={(e) => setPaymentLink(e.target.value)}
+              className="payment-input"
+            />
+
           </div>
 
           <div className="action-buttons">
