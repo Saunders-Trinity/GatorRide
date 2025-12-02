@@ -1,6 +1,6 @@
-//const db = require(".. /../config/db");
-const db = require('../../db/connection'); //trying this one
-//const db = require('../config/db');//doesnt seem to work?
+
+const db = require('../../db/connection');
+
 
 
 

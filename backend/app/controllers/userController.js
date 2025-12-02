@@ -30,7 +30,7 @@ exports.createUser = async (req, res) => {
   }
 };
 
-// FIXED: Load user using query param
+
 exports.getCurrentUser = async (req, res) => {
   const userId = req.query.userId; // <-- FIX HERE
 
@@ -56,7 +56,7 @@ exports.getCurrentUser = async (req, res) => {
   }
 };
 
-// FIXED: Update user using query param
+
 exports.updateUser = async (req, res) => {
   const { first_name, last_name, phone, payment_link, password } = req.body;
   

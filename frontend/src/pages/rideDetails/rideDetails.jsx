@@ -63,16 +63,16 @@ const handleConfirm = async () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         ride_id: rideId,
-        passenger_id: user.user_id,   // 
+        passenger_id: user.user_id,   
         seats_reserved: 1,
-        payment_link: paymentLink,    // what they typed
+        payment_link: paymentLink,    
       }),
     });
 
     const data = await res.json();
     console.log("Booking result:", data);
 
-    // you can change this later to whatever page you want
+    
     navigate("/profile");
   } catch (err) {
     console.error("Booking error:", err);
@@ -125,7 +125,7 @@ const handleConfirm = async () => {
     );
   }
 
-  // Format date/time nicely
+  // Format date/time
   const dateObj = new Date(ride.ride_date);
   const dateStr = dateObj.toLocaleDateString("en-US", {
     year: "numeric",
@@ -134,7 +134,7 @@ const handleConfirm = async () => {
   });
   const timeStr = ride.ride_time?.slice(0, 5);
 
-  // Poster info if backend sent it (e.g. driver_name, payment_link)
+  
   const posterName =
     ride.driver_name ||
     ride.driver_full_name ||

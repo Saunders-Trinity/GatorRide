@@ -1,4 +1,3 @@
-//import Navbar from "../../components/Navbar/Navbar";
 import "./reportManager.css";
 import React, {useEffect, useState} from "react";
 import ReportCard from "../../components/ReportCard/ReportCard";  
