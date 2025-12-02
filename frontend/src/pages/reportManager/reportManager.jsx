@@ -23,12 +23,50 @@ const ReportManager = () => {
                 console.error("Fetch reports error: ", err);
                 setError()
             }
-        }
-    })
+            finally {
+                setLoading(false);
+            }
+        };
 
-    return(
-        <div>
-            <h1>TEMPORARY: admin only report manager</h1>
+        fetchReports();
+    }, []);
+
+    const handleDelete = async (id) => {
+        try{
+            const res = await fetch(`http://localhost:8000/api/reports/${id}`, {
+                method: "DELETE",
+            });
+
+            const data = await res.json();
+
+            if (!res.ok){
+                alert(data.error || "Failed to delete report.");
+                return;
+            }
+
+            setReports((prev)=>prev.filter((rep)=> rep.id !== id));
+        }
+        catch (err){
+            console.error("Delete report error: ", err);
+            alert("Server error deleteing report.");
+        }
+    };
+    
+    return (
+        <div className="report-manager">
+        <h1>Report Manager</h1>
+
+        {loading && <p>Loading reports...</p>}
+
+        <div className="report-cards-container">
+            {reports.map((report) => (
+            <ReportCard
+                key={report.id}
+                report={report}
+                onDelete={handleDelete}
+            />
+            ))}
+        </div>
         </div>
     );
 };
