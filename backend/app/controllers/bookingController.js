@@ -14,20 +14,29 @@ exports.getBookings = async (req, res) => {
 
 // Create a booking
 exports.createBooking = async (req, res) => {
-  const { ride_id, passenger_id, seats_reserved } = req.body;
-  if (!ride_id || !passenger_id)
+  const { ride_id, passenger_id, seats_reserved, payment_link } = req.body;
+
+  if (!ride_id || !passenger_id) {
     return res.status(400).json({ error: 'Missing required fields' });
+  }
 
   try {
     const [result] = await db.query(
-      'INSERT INTO bookings (ride_id, passenger_id, seats_reserved) VALUES (?, ?, ?)',
-      [ride_id, passenger_id, seats_reserved || 1]
+      `INSERT INTO bookings (ride_id, passenger_id, seats_reserved, payment_link)
+       VALUES (?, ?, ?, ?)`,
+      [ride_id, passenger_id, seats_reserved || 1, payment_link || null]
     );
-    res.status(201).json({ message: 'Booking created', booking_id: result.insertId });
+
+    res.status(201).json({
+      message: 'Booking created',
+      booking_id: result.insertId,
+    });
   } catch (err) {
+    console.error('createBooking error:', err);
     res.status(500).json({ error: err.message });
   }
 };
+
 
 // Update booking
 exports.updateBooking = async (req, res) => {
