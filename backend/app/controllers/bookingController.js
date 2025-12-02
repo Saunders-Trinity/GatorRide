@@ -65,3 +65,41 @@ exports.deleteBooking = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+// Getting the User-Specfic Bookings [Split as User is Driver | User is Passenger]
+exports.getUserBookings = async (req, res) => {
+  const userId = req.query.userId;
+  if (!userId){
+    return res.status(400).json({error: "Missing userId"});
+  }
+
+try {
+    // Bookings where the user is a driver
+    const [driverRows] = await db.query(
+      `SELECT B.booking_id, B.ride_id, B.passenger_id, B.seats_reserved, 
+        CONCAT(U.first_name, ' ', U.last_name) AS passenger_name
+      FROM BOOKINGS B
+      JOIN USERS U ON B.passenger_id = U.user_id
+      JOIN RIDES R ON B.ride_id = R.ride_id
+      WHERE R.driver_id = ?`,
+      [userId]
+    );
+
+    // Bookings where the user is a passenger
+    const [passengerRows] = await db.query(
+      `SELECT B.booking_id, B.ride_id, B.passenger_id, B.seats_reserved, 
+        CONCAT(U.first_name, ' ', U.last_name) AS driver_name
+      FROM BOOKINGS B
+      JOIN USERS U ON B.passenger_id = U.user_id
+      JOIN RIDES R ON B.ride_id = R.ride_id
+      WHERE B.passenger_id = ?`,
+      [userId]
+    );
+
+    res.json({driverBookings: driverRows, passengerBookings: passengerRows});
+  }
+  catch (err){
+    console.error('getUserBookings error:', err);
+    res.status(500).json({error: 'Backend server error.'});
+  }
+};

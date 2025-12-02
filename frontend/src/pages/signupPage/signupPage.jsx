@@ -17,8 +17,6 @@ const SignUpPage = ({ onSignup }) => {
         profilePic: null,
     });
 
-
-
     /* these functions are to handle when the user updates their profile */
     /* prev is the previous val before the user enters anything  */
     /* ... copies existing state so updating one field doesn't wipe out entire formData */

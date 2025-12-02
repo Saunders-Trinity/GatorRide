@@ -50,7 +50,7 @@ function App() {
         <Route path="/" element={<HomeScreen user={user} />} />
         <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
         <Route path="/signup" element={<SignUpPage onSignup={handleSignup} />} />
-        <Route path="/profile" element={<GeneralProfile localUser={user} />} />
+        <Route path="/profile" element={<GeneralProfile user={user}/>} />
         <Route path="/report" element={<ReportManager />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/post" element={<PostRide user={user} />} />
