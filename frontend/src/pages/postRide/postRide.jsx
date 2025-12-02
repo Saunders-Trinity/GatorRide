@@ -99,14 +99,6 @@ const PostRide = ({ user }) => {
         <Link to="/" className="return-btn">
           ← Return
         </Link>
-        <div className="search-bar-container">
-          <input
-            type="text"
-            className="search-bar"
-            placeholder="Search for rides here"
-          />
-          <button className="search-btn">Search</button>
-        </div>
       </header>
 
       {/* main content */}

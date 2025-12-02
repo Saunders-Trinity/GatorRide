@@ -25,28 +25,6 @@
     cursor: pointer;
   }
   
-  .search-bar-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .search-bar {
-    padding: 6px 10px;
-    border-radius: 6px;
-    border: none;
-  }
-  
-  .search-btn {
-    background-color: #f58220;
-    border: none;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
   /* main content */
   .postride-content {
     flex: 1;
