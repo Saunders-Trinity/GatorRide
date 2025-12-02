@@ -19,7 +19,7 @@ const SearchPage = () => {
     setLoading(true);
 
     try {
-      // Build query string to hit GET /api/rides
+      
       const params = new URLSearchParams();
 
       if (query) params.append("q", query);

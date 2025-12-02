@@ -20,10 +20,7 @@ const PostRide = ({ user }) => {
 
   const navigate = useNavigate();
 
-  // --- Figure out the driver id ---
 
-  // prefer the id that comes from React state
-  // try user.user_id first; fall back to user.id if your backend uses that
   const driverIdFromUser = user?.user_id ?? user?.id ?? null;
 
   // fall back to localStorage (set in App.js after login/signup)
@@ -62,7 +59,6 @@ const PostRide = ({ user }) => {
         ride_time: rideTime, // "HH:MM"
         available_seats: Number(seats),
         gas_cost: gasCost === "" ? null : Number(gasCost),
-        // you can also send make/model/year here if your backend supports it
       };
 
       const res = await fetch("http://localhost:8000/api/rides", {

@@ -25,29 +25,13 @@ const SignUpPage = ({ onSignup }) => {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    // const addPaymentLink = () => {
-    //     setFormData((prev) => ({
-    //         ...prev,
-    //         paymentLinks: [...prev.paymentLinks, ""],
-    //       }));
-    // };
-
-    // const handleLinkChange = (index, value) => {
-    //     const updatedLinks = [ ...formData.paymentLinks];
-    //     updatedLinks[index] = value;
-    //     setFormData((prev) => ({ ...prev, paymentLinks: updatedLinks}));
-    // };
 
     const handleProfilePic = (e) => {
         const file = e.target.files[0];
         setFormData((prev) => ({ ...prev, profilePic: file}));
     };
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     console.log("Form submitted:", formData);
-    //     //add backend connection to add user to database
-    // }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -58,24 +42,17 @@ const SignUpPage = ({ onSignup }) => {
           return;
         }
       
-        // matching backend field names, change to add profile pic and payment info, phone is null for now
-        // const payload = {
-        //   first_name: formData.firstName,
-        //   last_name: formData.lastName,
-        //   email: formData.ufEmail,
-        //   password: formData.password,
-        //   phone: null, // backend will handle this as null (for now)
-        // };
+        
         const payload = {
             first_name: formData.firstName,
             last_name: formData.lastName,
             email: formData.ufEmail,
             password: formData.password,
             phone: formData.phone || null,
-            payment_link: formData.paymentLink || null,   // NEW
+            payment_link: formData.paymentLink || null,   
         };
 
-         console.log("SIGNUP payload →", payload); //added 
+         console.log("SIGNUP payload →", payload); 
 
       
         try {

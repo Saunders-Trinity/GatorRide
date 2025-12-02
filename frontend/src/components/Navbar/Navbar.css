@@ -58,12 +58,7 @@
     color: #ff7f00;
 }
 
-/*
-.nav-button:hover{
-    transform: scale(1.05);
-    background-color: rgba(0, 0, 0, 0.05);
-}
-    */
+
 .login:hover{
     transform: scale(1.05);
     background-color: #fae5cf;

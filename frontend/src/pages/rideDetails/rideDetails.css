@@ -172,7 +172,7 @@ cursor: pointer;
 /* Payment Button */
 .payment-link-btn {
 display: block;
-background-color: #1e90ff; /* nice UF-ish blue */
+background-color: #1e90ff; 
 color: white;
 padding: 10px 16px;
 border-radius: 8px;
