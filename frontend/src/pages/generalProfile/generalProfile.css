@@ -1,0 +1,34 @@
+.profile-head-name h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    background-color: #ccd8fc;
+    padding: 10px 20px;
+    display: inline-block;
+}
+
+.profile-bio p {
+    font-size: 1.2rem;
+    max-width: 420px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.edit-button-group {
+    
+}
+
+.profile-save-button{
+
+}
+
+.profile-cancel-button{
+
+}
+
+.profile-edit-button{
+
+}
+
+.profile-save-button{
+
+}
