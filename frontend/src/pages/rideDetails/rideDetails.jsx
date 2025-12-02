@@ -1,7 +1,21 @@
 // frontend/src/pages/rideDetails/rideDetails.jsx
 import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import "./rideDetails.css";
 import { useParams, useNavigate } from "react-router-dom";
+
+//Citation: https://stackoverflow.com/questions/61749580/how-to-create-an-overlay-with-react
+const Popup = ({children, onClose}) => {
+  const modalRoot = document.getElementById("modal-root");
+  return ReactDOM.createPortal(
+    <div className="popup-overlay" onClick={onClose}>
+      <div className="popup-box" onClick={e=>e.stopPropagation()}>
+        {children}
+      </div>
+    </div>,
+    modalRoot
+  );
+};
 
 const RideDetails = ({ user }) => {
   const { rideId } = useParams();
@@ -11,6 +25,7 @@ const RideDetails = ({ user }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [paymentLink, setPaymentLink] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const fetchRide = async () => {
@@ -63,12 +78,31 @@ const handleConfirm = async () => {
     console.error("Booking error:", err);
   }
 };
-
-
-
   const handleCancel = () => {
     navigate(-1);
   };
+
+  const submitReport = async () => {
+    try {
+      const res = await fetch("http://localhost:8000/api/reports", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          reporter_id: user.user_id,
+          reported_user_id: ride.driver_id,
+          reason: "User Reported",
+        }),
+      });
+
+      const data = await res.json();
+      console.log("Report submitted:", data);
+      setShowPopup(false);
+      alert("User reported successfully.");
+      }
+    catch (err) {
+      console.error("Report error:", err);
+      }
+    };
 
   if (loading) {
     return (
@@ -168,12 +202,13 @@ const handleConfirm = async () => {
   </div>
 </div>
 
-
         {/* right side */}
         <div className="poster-box">
           <div className="poster-header">
             <div className="poster-icon">👤</div>
-            <h3>{posterName}</h3>
+            <button className="poster-button" onClick={()=>setShowPopup(true)}>
+              {posterName}
+            </button>
           </div>
 
           <div className="payment-links">
@@ -189,7 +224,6 @@ const handleConfirm = async () => {
               onChange={(e) => setPaymentLink(e.target.value)}
               className="payment-input"
             />
-
           </div>
 
           <div className="action-buttons">
@@ -202,6 +236,17 @@ const handleConfirm = async () => {
           </div>
         </div>
       </main>
+
+      {/* Report User Popup */}
+      {showPopup && (
+        <Popup onClose={() => setShowPopup(false)}>
+          <h3>Report User</h3>
+          <div className="popup-buttons">
+            <button className="popup-report-button" onClick={submitReport}>Report User</button>
+            <button className="popup-cancel-button" onClick={() => setShowPopup(false)}>Cancel</button>
+          </div>
+        </Popup>
+      )}
     </div>
   );
 };

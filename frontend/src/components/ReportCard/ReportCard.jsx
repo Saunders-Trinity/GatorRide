@@ -1,7 +1,7 @@
 import React from "react";
 import "./ReportCard.css";
 
-const ReportCard = (report, onDelete) =>{
+const ReportCard = ({report, onDelete}) =>{
     const reportedAt = new Date(report.created_at).toLocaleString();
     return (
         <div className = "report-card">
@@ -9,13 +9,13 @@ const ReportCard = (report, onDelete) =>{
                 <h3>Report #{report.report_id}</h3>
             </div>
             
-            <button className="report-delete button" onClick={()=>onDelete(report.report_id)}>X</button>
+            <button className="report-delete-button" onClick={()=>onDelete(report.report_id)}>Remove</button>
             
             <div className="report-card-body">
-                <p> <label>Reported User ID: </label> {report.reported_user_id}</p>
-                <p> <label>Reported ID: </label> {report.reporter_id}</p>
-                <p> <label>Reason: </label> {report.reason}</p>
-                <p> <label>Reported On: </label> {reportedAt} </p>
+                <p> <strong>Reported User ID: </strong> {report.reported_user_id}</p>
+                <p> <strong>Reported ID: </strong> {report.reporter_id}</p>
+                <p> <strong>Reason: </strong> {report.reason}</p>
+                <p> <strong>Reported On: </strong> {reportedAt} </p>
             </div>
         </div>
     )

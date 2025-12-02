@@ -14,11 +14,11 @@ exports.getAllReports = async (req, res) => {
 
 // Add a new report
 exports.addReport = async (req, res) => {
-  const { user_id, ride_id, reason } = req.body;
+  const { reporter_id, reported_user_id, reason } = req.body;
   try {
-    await db.query(
-      'INSERT INTO reports (user_id, ride_id, reason, created_at) VALUES (?, ?, ?, NOW())',
-      [user_id, ride_id, reason]
+    const result = await db.query(
+      'INSERT INTO reports (reporter_id, reported_user_id, reason, created_at) VALUES (?, ?, ?, NOW())',
+      [reporter_id, reported_user_id, reason]
     );
     res.status(201).json({ message: 'Report added successfully' });
   } catch (err) {
@@ -31,7 +31,7 @@ exports.addReport = async (req, res) => {
 exports.deleteReport = async (req, res) => {
   const { id } = req.params;
   try {
-    await db.query('DELETE FROM reports WHERE id = ?', [id]);
+    await db.query('DELETE FROM reports WHERE report_id = ?', [id]);
     res.json({ message: 'Report deleted successfully' });
   } catch (err) {
     console.error('Error deleting report:', err);

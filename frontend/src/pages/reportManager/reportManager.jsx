@@ -44,7 +44,7 @@ const ReportManager = () => {
                 return;
             }
 
-            setReports((prev)=>prev.filter((rep)=> rep.id !== id));
+            setReports((prev)=>prev.filter((rep)=> rep.report_id !== id));
         }
         catch (err){
             console.error("Delete report error: ", err);
@@ -61,12 +61,13 @@ const ReportManager = () => {
         <div className="report-cards-container">
             {reports.map((report) => (
             <ReportCard
-                key={report.id}
+                key={report.report_id}
                 report={report}
                 onDelete={handleDelete}
             />
             ))}
         </div>
+        {!loading && reports.length === 0 && <p>No reports found.</p>}
         </div>
     );
 };

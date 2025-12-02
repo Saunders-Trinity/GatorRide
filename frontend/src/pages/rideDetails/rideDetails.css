@@ -1,176 +1,233 @@
-  /* overall page */
+/* overall page */
 .ridedetails-page {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background-color: #f8f9fb;
-    font-family: "Inter", sans-serif;
-  }
-  
-  /* header */
-  .ridedetails-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #0021a5;
-    color: white;
-    padding: 10px 20px;
-  }
-  
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .search-bar {
-    padding: 6px 10px;
-    border-radius: 6px;
-    border: none;
-  }
-  
-  .search-btn {
-    background-color: #f58220;
-    border: none;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  /* main layout */
-  .ridedetails-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    padding: 40px 80px;
-    flex: 1;
-    align-items: start; /* ensures top alignment */
-  }
-  
-  /* left side */
- /* ride details title */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f8f9fb;
+  font-family: "Inter", sans-serif;
+}
+
+/* header */
+.ridedetails-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0021a5;
+  color: white;
+  padding: 10px 20px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-bar {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+}
+
+.search-btn {
+  background-color: #f58220;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* main layout */
+.ridedetails-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 40px 80px;
+  flex: 1;
+  align-items: start; /* ensures top alignment */
+}
+
+/* left side */
+/* ride details title */
 .ride-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #003087;
-  margin-bottom: 12px;
+font-size: 24px;
+font-weight: 700;
+color: #003087;
+margin-bottom: 12px;
 }
 
 /* card container */
 .ride-details-card {
-  background: #ffffff;
-  padding: 25px 30px;
-  border-radius: 12px;
-  border: 1px solid #dcdcdc;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
-  max-width: 650px;
-  width: 100%;
+background: #ffffff;
+padding: 25px 30px;
+border-radius: 12px;
+border: 1px solid #dcdcdc;
+box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+max-width: 650px;
+width: 100%;
 }
 
 /* rows inside the card */
 .details-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 16px;
+display: flex;
+justify-content: space-between;
+margin-bottom: 16px;
 }
 
 /* individual label/value pairs */
 .detail-item {
-  display: flex;
-  gap: 8px;
-  align-items: center;
+display: flex;
+gap: 8px;
+align-items: center;
 }
 
 .label {
-  font-weight: 600;
-  color: #023e8a;
+font-weight: 600;
+color: #023e8a;
 }
 
 .value {
-  font-weight: 500;
-  color: #333;
+font-weight: 500;
+color: #333;
 }
 
-  
-  /* right side */
-  .poster-box {
-    flex: 1;
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 25px;
-    margin-left: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .poster-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .poster-icon {
-    font-size: 1.5rem;
-  }
-  
-  .payment-links {
-    margin-top: 30px;
-  }
-  
-  .payment-placeholder {
-    border: 1px dashed #aaa;
-    border-radius: 5px;
-    padding: 8px;
-    margin-bottom: 10px;
-    text-align: center;
-    color: #666;
-  }
-  
-  /* buttons */
-  .action-buttons {
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 30px;
-  }
-  
-  .confirm-btn {
-    background-color: #0021a5;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .cancel-btn {
-    background: none;
-    border: 2px solid red;
-    color: red;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  /* Payment Button */
-.payment-link-btn {
-  display: block;
-  background-color: #1e90ff; /* nice UF-ish blue */
-  color: white;
-  padding: 10px 16px;
+
+/* right side */
+.poster-box {
+  flex: 1;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
   border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
+  padding: 25px;
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.poster-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.poster-icon {
+  font-size: 1.5rem;
+}
+
+.poster-button {
+  background: none;
+  border: none;
+  color: #0066cc;
+  font-size: 1.2rem;
+  cursor: pointer; text-decoration: underline;
+  padding: 0;
+}
+.post-button:hover{
+  color: #cad3db;
+}
+
+.payment-links {
+  margin-top: 30px;
+}
+
+.payment-placeholder {
+  border: 1px dashed #aaa;
+  border-radius: 5px;
+  padding: 8px;
+  margin-bottom: 10px;
   text-align: center;
-  margin-bottom: 12px;
-  transition: 0.2s ease-in-out;
+  color: #666;
+}
+
+/* buttons */
+.action-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 30px;
+}
+
+.confirm-btn {
+  background-color: #0021a5;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cancel-btn {
+background: none;
+border: 2px solid red;
+color: red;
+padding: 8px 16px;
+border-radius: 6px;
+font-weight: bold;
+cursor: pointer;
+}
+
+/* Payment Button */
+.payment-link-btn {
+display: block;
+background-color: #1e90ff; /* nice UF-ish blue */
+color: white;
+padding: 10px 16px;
+border-radius: 8px;
+text-decoration: none;
+font-weight: 600;
+text-align: center;
+margin-bottom: 12px;
+transition: 0.2s ease-in-out;
 }
 
 .payment-link-btn:hover {
-  background-color: #156ccc;
+background-color: #156ccc;
+}
+
+/*Popup Overlay*/
+.popup-overlay{
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-box {
+    background: #ffffff;
+    padding: 25px 35px;
+    border-radius: 12px;
+    max-width: 350px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.popup-report-btn {
+    background: red;
+    border: none;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.popup-cancel-btn {
+    background: white;
+    border: none;
+    color: black;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
 }
