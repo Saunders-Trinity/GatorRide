@@ -3,7 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import {FaEye, FaEyeSlash, FaStar} from "react-icons/fa"; //https://dev.to/annaqharder/hideshow-password-in-react-513a
 import "./generalProfile.css";
 
-const GeneralProfile = () => {
+const GeneralProfile = ({user}) => {
     //Password Toggling
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
@@ -28,8 +28,13 @@ const GeneralProfile = () => {
         userId: null,
     });
 
+    //User Id with fallback to local
+    const userIdState = user?.user_id ?? user?.id ?? null;
+    const userIdLocal = localStorage.getItem("user_id") ? Number(localStorage.getItem("user_id")) : null;
+    const userId = formData.userId ?? userIdState ?? userIdLocal;
+
     const[loading, setLoading] = useState(true); //prevent rendering when not loaded
-    if (loading){
+    if (loading && userId){
         (async () => {
             try {
                 //Load in the User Profile
