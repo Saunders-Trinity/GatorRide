@@ -14,4 +14,7 @@ router.put('/:id', bookingController.updateBooking);
 // DELETE booking
 router.delete('/:id', bookingController.deleteBooking);
 
+// Get User-Specific Booking
+router.get('/user/:userId', bookingController.getUserBookings);
+
 module.exports = router;
