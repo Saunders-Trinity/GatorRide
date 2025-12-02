@@ -28,6 +28,9 @@ const GeneralProfile = ({user}) => {
         userId: null,
     });
 
+    const [originalData, setOriginalData] = useState(null);
+
+
     //User Id with fallback to local
     const userIdState = user?.user_id ?? user?.id ?? null;
     const userIdLocal = localStorage.getItem("user_id") ? Number(localStorage.getItem("user_id")) : null;
@@ -60,8 +63,19 @@ const GeneralProfile = ({user}) => {
                     userId: profileData.user_id,
                 })
 
+                setOriginalData({
+                    firstName: profileData.first_name,
+                    lastName: profileData.last_name,
+                    ufEmail: profileData.email,
+                    phone: profileData.phone || "",
+                    paymentLink: profileData.payment_link || "",
+                    rating: profileData.rating || 5.0,
+                    userId: profileData.user_id,
+                });
+
+
                 //Handle Bookings
-                const bookingsLoaded = await fetch(`http://localhost:8000/api/bookings/user?userId=${profileData.user_id}`);
+                const bookingsLoaded = await fetch(`http://localhost:8000/api/bookings/user/${profileData.user_id}`);
                 if (!bookingsLoaded.ok){
                     console.error("Failed to load bookings for User");
                 }
@@ -91,61 +105,77 @@ const GeneralProfile = ({user}) => {
         setFormData((prev) => ({ ...prev, profilePic: file}));
     };
 
-    const handleSave = async () => {
-        // Passwords must match
-        if (formData.password !== formData.confirmPassword) {
-          alert("Passwords do not match!");
-          return;
-        }
+const handleSave = async () => {
+  // Passwords must match
+  if (formData.password !== formData.confirmPassword) {
+    alert("Passwords do not match!");
+    return;
+  }
 
-        //Backend Start
-        const payload = {
-            first_name: formData.firstName,
-            last_name: formData.lastName,
-            phone: formData.phone || null,
-            payment_link: formData.paymentLink || null,  
-        };
+  // Build payload
+  const payload = {
+    first_name: formData.firstName,
+    last_name: formData.lastName,
+    phone: formData.phone || null,
+    payment_link: formData.paymentLink || null,
+  };
 
-        if (formData.password.length() > 0){
-            payload.password = formData.password;
-        }
+  // Only include password if typed
+  if (formData.password && formData.password.length > 0) {
+    payload.password = formData.password;
+  }
 
-        console.log("UPDATE payload: ", payload);
-        
-        // Fetch the Backend Routing
-        try {
-          const response = await fetch("http://localhost:8000/api/users/profile", {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          });
-      
-          const data = await response.json();
-      
-          if (response.ok) {
-            alert("Profile Saved.");
-            console.log("Update Successful:", data);
+  console.log("UPDATE payload:", payload);
 
-            //Safety Check
-            setFormData((prev) => ({...prev, password: "", confirmPassword:"",}));
-            //Save Changes
-            setEditMode(false);
-          }
-          else {
-            alert(data.error || "Update Profile Failed.");
-            console.log("Update Error:", data);
-          }
-        } catch (err) {
-            console.error("Update Error:", err);
-            alert("Backend Server Error.");
-        }
+  try {
+    const response = await fetch(
+      `http://localhost:8000/api/users/profile?userId=${userId}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      alert(data.error || "Update Profile Failed.");
+      console.log("Update error:", data);
+      return;
     }
+
+    alert("Profile saved!");
+
+    // Clear password fields, exit edit mode
+    setFormData((prev) => ({
+      ...prev,
+      password: "",
+      confirmPassword: "",
+    }));
+
+    setEditMode(false);
+
+  } catch (err) {
+    console.error("Update error:", err);
+    alert("Backend server error.");
+  }
+};
+
+
 
     const handleCancel = () => {
-        //Cancel edits - revert to original user data
+        if (originalData) {
+            setFormData({
+                ...originalData,
+                password: "",
+                confirmPassword: "",
+                profilePic: null,
+            });
+        }
         setEditMode(false);
-        setFormData((prev)=>({...prev, password: "", confirmPassword: ""}));
-    }
+    };
+
 
     // Star Rating: https://www.youtube.com/watch?v=MzhJmcuyMZI
     const starRating = (rating) => {
@@ -300,7 +330,7 @@ const GeneralProfile = ({user}) => {
                 <div className="profile-rating">
                     <label>Rating:</label>
                     <div className="stars">{starRating(formData.rating || 5.0)}</div>
-                    <span>{(formData.rating || 5).toFixed(1)}/5.0</span>
+                    <span>{Number(formData.rating ?? 5).toFixed(1)}/5.0</span>
                 </div>
             </div>
         </div>
