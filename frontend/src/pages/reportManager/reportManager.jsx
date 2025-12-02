@@ -1,7 +1,7 @@
 //import Navbar from "../../components/Navbar/Navbar";
 import "./reportManager.css";
 import React, {useEffect, useState} from "react";
-import ReportCard from "../components/ReportCard";
+import ReportCard from "../../components/ReportCard/ReportCard";  
 
 const ReportManager = () => {
     const [reports, setReports] = useState([]);
@@ -16,12 +16,12 @@ const ReportManager = () => {
                     setReports(Array.isArray(data) ? data:[]);
                 }
                 else{
-                    setError(data.error || "Failed to fetch reports");
+                    alert(data.error || "Failed to fetch reports");
                 }
             }
             catch (err){
                 console.error("Fetch reports error: ", err);
-                setError()
+                alert("Server error fetching reports.");
             }
             finally {
                 setLoading(false);
