@@ -1,14 +1,46 @@
 const db = require('../../db/connection');
 
-// GET all rides
 exports.getRides = async (req, res) => {
   try {
-    const [rows] = await db.query('SELECT * FROM rides');
+    const { q, startDate, endDate, seats } = req.query;
+
+    let query = `
+      SELECT *
+      FROM rides
+      WHERE 1 = 1
+    `;
+    const params = [];
+
+    if (q && q.trim() !== "") {
+      query += " AND (origin LIKE ? OR destination LIKE ?)";
+      params.push(`%${q}%`, `%${q}%`);
+    }
+
+    if (startDate) {
+      query += " AND ride_date >= ?";
+      params.push(startDate);
+    }
+
+    if (endDate) {
+      query += " AND ride_date <= ?";
+      params.push(endDate);
+    }
+
+    if (seats && !isNaN(seats)) {
+      query += " AND available_seats >= ?";
+      params.push(Number(seats));
+    }
+
+    query += " ORDER BY ride_date ASC, ride_time ASC";
+
+    const [rows] = await db.query(query, params);
     res.json(rows);
   } catch (err) {
+    console.error("getRides error:", err);
     res.status(500).json({ error: err.message });
   }
 };
+
 
 // CREATE new ride
 exports.createRide = async (req, res) => {
